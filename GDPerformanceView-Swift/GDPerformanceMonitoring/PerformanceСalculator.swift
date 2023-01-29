@@ -150,6 +150,7 @@ private extension PerformanceCalculator {
 private extension PerformanceCalculator {
     func configureDisplayLink() {
         self.displayLink = CADisplayLink(target: self, selector: #selector(PerformanceCalculator.displayLinkAction(displayLink:)))
+        self.displayLink.preferredFramesPerSecond = 5
         self.displayLink.isPaused = true
         self.displayLink?.add(to: .current, forMode: .common)
     }
