@@ -174,7 +174,11 @@ private extension PerformanceView {
 private extension PerformanceView {
     func configureWindow() {
         self.rootViewController = WindowViewController()
+        #if os(tvOS)
+        self.windowLevel = UIWindow.Level.alert + 1.0
+        #else
         self.windowLevel = UIWindow.Level.statusBar + 1.0
+        #endif
         self.backgroundColor = .clear
         self.clipsToBounds = true
         self.isHidden = true
@@ -218,9 +222,11 @@ private extension PerformanceView {
     }
     
     func subscribeToNotifications() {
+        #if !os(tvOS)
         NotificationCenter.default.addObserver(forName: UIApplication.willChangeStatusBarFrameNotification, object: nil, queue: .main) { [weak self] (notification) in
             self?.applicationWillChangeStatusBarFrame(notification: notification)
         }
+        #endif
     }
     
     func configureView(withStyle style: PerformanceMonitor.Style) {

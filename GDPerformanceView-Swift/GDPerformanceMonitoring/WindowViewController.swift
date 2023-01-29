@@ -32,11 +32,14 @@ internal class WindowViewController: UIViewController, StatusBarConfigurator {
     /// Overrides prefersStatusBarHidden.
     public var statusBarHidden = false {
         didSet {
+            #if !os(tvOS)
             self.setNeedsStatusBarAppearanceUpdate()
+            #endif
         }
     }
     
     /// Overrides preferredStatusBarStyle.
+    #if !os(tvOS)
     public var statusBarStyle = UIStatusBarStyle.default {
         didSet {
             self.setNeedsStatusBarAppearanceUpdate()
@@ -44,7 +47,6 @@ internal class WindowViewController: UIViewController, StatusBarConfigurator {
     }
     
     // MARK: Properties Overriders
-    
     override var prefersStatusBarHidden: Bool {
         get {
             return self.statusBarHidden
@@ -56,6 +58,7 @@ internal class WindowViewController: UIViewController, StatusBarConfigurator {
             return self.statusBarStyle
         }
     }
+    #endif
     
     // MARK: Init Methods & Superclass Overriders
     

@@ -29,7 +29,7 @@ public typealias MemoryUsage = (used: UInt64, total: UInt64)
 public typealias PerformanceReport = (cpuUsage: Double, fps: Int, memoryUsage: MemoryUsage)
 
 /// Performance monitor delegate. Gets called on the main thread.
-public protocol PerformanceMonitorDelegate: class {
+public protocol PerformanceMonitorDelegate: AnyObject {
     /// Reports monitoring information to the receiver.
     ///
     /// - Parameters:
@@ -46,5 +46,7 @@ public protocol PerformanceViewConfigurator {
 
 public protocol StatusBarConfigurator {
     var statusBarHidden: Bool { get set }
+    #if !os(tvOS)
     var statusBarStyle: UIStatusBarStyle { get set }
+    #endif
 }

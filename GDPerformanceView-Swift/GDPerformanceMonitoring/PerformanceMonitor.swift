@@ -87,6 +87,7 @@ public class PerformanceMonitor {
         set { }
     }
     
+    @available(tvOS, unavailable)
     public var statusBarConfigurator: StatusBarConfigurator {
         get {
             guard let rootViewController = self.performanceView.rootViewController as? WindowViewController else {
